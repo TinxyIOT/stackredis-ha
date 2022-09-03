@@ -2,6 +2,8 @@ version: "3.3"
 
 networks:
   tinxy-net:
+    external:
+      name: tinxy-net
 
 services:
 
