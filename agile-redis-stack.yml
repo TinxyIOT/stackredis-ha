@@ -1,8 +1,12 @@
 version: "3.3"
+
+networks:
+  tinxy-net:
+
 services:
 
   redis-sentinel:
-    image: 127.0.0.1:5000/agile-redis-sentinel
+    image: registry.mogify.com/agile-redis-sentinel
     volumes:
       - sentinel-conf:/etc/redis
     deploy:
@@ -12,23 +16,23 @@ services:
       - SENTINEL_DOWN_AFTER=5000
       - SENTINEL_FAILOVER=15000
     networks:
-      - host
+      - tinxy-net
 
   redis-master:
-    image: 127.0.0.1:5000/agile-redis
+    image: registry.mogify.com/agile-redis
     volumes:
-      - redis-data:/data
-      - redis-conf:/etc/redis
+      - redis-master-data:/data
+      - redis-master-conf:/etc/redis
     deploy:
       mode: global
       placement:
         constraints:
-          - node.hostname == ${REDIS_MASTER_HOSTNAME}
+          - node.hostname == in-lb1
     networks:
-      - host
+      - tinxy-net
 
   redis-slave-node1:
-    image: 127.0.0.1:5000/agile-redis
+    image: registry.mogify.com/agile-redis
     volumes:
       - redis-data:/data
       - redis-conf:/etc/redis
@@ -38,12 +42,12 @@ services:
       mode: global
       placement:
         constraints:
-          - node.hostname == ${REDIS_SLAVE_NODE1_HOSTNAME}
+          - node.hostname == in-lb1
     networks:
-      - host
+      - tinxy-net
 
   redis-slave-node2:
-    image: 127.0.0.1:5000/agile-redis
+    image: registry.mogify.com/agile-redis
     volumes:
       - redis-data:/data
       - redis-conf:/etc/redis
@@ -53,24 +57,13 @@ services:
       mode: global
       placement:
         constraints:
-          - node.hostname == ${REDIS_SLAVE_NODE2_HOSTNAME}
+          - node.hostname == in2
     networks:
-      - host
-
-  agile-python-app:
-    image: 127.0.0.1:5000/agile-python-app
-    ports:
-      - "38000:611"
-    deploy:
-      mode: replicated
-      replicas: 3
-    environment:
-      - SENTINEL_HOST=${SENTINEL_IP}
+      - tinxy-net
 
 volumes:
   redis-data:
   redis-conf:
   sentinel-conf:
-networks:
-  host:
-    external: true
+  redis-master-data:
+  redis-master-conf:
