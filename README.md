@@ -21,3 +21,7 @@ Redis Sentinel with Docker Swarm.
     Full name: Emmanuel Hodonou 
     Mail: emmano3h@gmail.com 
     Github: https://github.com/emmano3h/
+
+
+# Tinxy
+./deploy.sh redis-sentinel redis-master redis-slave-node1 redis-slave-node2
