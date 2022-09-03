@@ -17,6 +17,10 @@ services:
       - SENTINEL_FAILOVER=15000
     networks:
       - tinxy-net
+    ports:
+      - target: 26379
+        published: 16379
+        mode: host
 
   redis-master:
     image: registry.mogify.com/agile-redis
