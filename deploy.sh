@@ -28,8 +28,8 @@ echo "-------------------------------------------------------\n"
 
 
 echo "4- Start to deploy the stack..."
-export SENTINEL_IP=$SENTINEL_HOSTNAME
-export REDIS_MASTER_IP=$REDIS_MASTER_HOSTNAME
+export SENTINEL_IP=`docker node inspect --format {{.Status.Addr}} $SENTINEL_HOSTNAME`
+export REDIS_MASTER_IP=`docker node inspect --format {{.Status.Addr}} $REDIS_MASTER_HOSTNAME`
 
 echo "Sentinel hostname and IP: $SENTINEL_HOSTNAME -  $SENTINEL_IP"
 echo "Redis Master hostname and IP: $REDIS_MASTER_HOSTNAME - $REDIS_MASTER_IP"
