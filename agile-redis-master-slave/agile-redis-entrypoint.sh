@@ -8,11 +8,11 @@ then
 
     if [ -n "$REDIS_MASTER_HOST" ]
     then
-        echo "slaveof redis-master 6379" >> $CONF_FILE
-        echo "masterauth McjN2UhLrwrDKf" > $CONF_FILE   
+        echo "slaveof redis-master 6379" > $CONF_FILE
+        echo "masterauth McjN2UhLrwrDKf" >> $CONF_FILE   
         echo "replica-announce-ip ${REDIS_SLAVE_HOST}" >> $CONF_FILE
     else 
-        echo "requirepass McjN2UhLrwrDKf" > $CONF_FILE   
+        echo "requirepass McjN2UhLrwrDKf" >> $CONF_FILE   
     fi
     chown redis:redis $CONF_FILE
 fi
