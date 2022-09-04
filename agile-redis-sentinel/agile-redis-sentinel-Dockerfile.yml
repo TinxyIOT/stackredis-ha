@@ -4,7 +4,7 @@ EXPOSE 26379
 
 ADD agile-redis-sentinel.conf /etc/redis/sentinel.conf
 
-# RUN chown redis:redis /etc/redis/sentinel.conf
+RUN chown redis:redis /etc/redis/sentinel.conf
 RUN chmod 0777 /etc/redis/sentinel.conf
 
 ENV REDIS_MASTER_NAME=mymaster \
