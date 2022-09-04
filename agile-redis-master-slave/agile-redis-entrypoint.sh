@@ -8,7 +8,7 @@ then
 
     if [ -n "$REDIS_MASTER_HOST" ]
     then
-       echo "slaveof $REDIS_MASTER_HOST ${REDIS_MASTER_PORT:-6379}" >> $CONF_FILE
+       echo "slaveof $REDIS_MASTER_HOST redis-master 6379" >> $CONF_FILE
     fi
     chown redis:redis $CONF_FILE
 fi
