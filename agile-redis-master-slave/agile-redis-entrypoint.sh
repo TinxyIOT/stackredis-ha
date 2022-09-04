@@ -5,15 +5,15 @@ CONF_FILE=/etc/redis/redis.conf
 if [ ! -f $CONF_FILE ]
 then
     echo "appendonly yes" > $CONF_FILE
+    echo "replica-announce-ip ${REDIS_SLAVE_HOST}" >> $CONF_FILE
+    echo "masterauth McjN2UhLrwrDKf" >> $CONF_FILE   
+    echo "requirepass McjN2UhLrwrDKf" >> $CONF_FILE   
 
     if [ -n "$REDIS_MASTER_HOST" ]
     then
         echo "slaveof redis-master 6379" > $CONF_FILE
-        echo "masterauth McjN2UhLrwrDKf" >> $CONF_FILE   
-        echo "replica-announce-ip ${REDIS_SLAVE_HOST}" >> $CONF_FILE
     # else 
     fi
-    echo "requirepass McjN2UhLrwrDKf" >> $CONF_FILE   
     chown redis:redis $CONF_FILE
 fi
 
