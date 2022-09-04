@@ -14,7 +14,7 @@ services:
     deploy:
       mode: global
     environment:
-      - REDIS_MASTER_HOST=${REDIS_MASTER_IP}
+      - REDIS_MASTER_HOST=redis-master
       - SENTINEL_DOWN_AFTER=5000
       - SENTINEL_FAILOVER=15000
     networks:
@@ -43,7 +43,7 @@ services:
       - redis-data:/data
       - redis-conf:/etc/redis
     environment:
-      - REDIS_MASTER_HOST=${REDIS_MASTER_IP}
+      - REDIS_MASTER_HOST=redis-master
     deploy:
       mode: global
       placement:
@@ -58,7 +58,7 @@ services:
       - redis-data:/data
       - redis-conf:/etc/redis
     environment:
-      - REDIS_MASTER_HOST=${REDIS_MASTER_IP}
+      - REDIS_MASTER_HOST=redis-master
     deploy:
       mode: global
       placement:
