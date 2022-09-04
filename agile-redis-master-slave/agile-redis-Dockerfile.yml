@@ -1,4 +1,4 @@
-FROM redis:5
+FROM redis:7.0.4
 
 COPY agile-redis-entrypoint.sh /usr/local/bin/
 
