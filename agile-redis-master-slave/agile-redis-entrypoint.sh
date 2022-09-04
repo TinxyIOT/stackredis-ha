@@ -16,6 +16,7 @@ then
         echo "replica-announce-ip redis-master" >> $CONF_FILE
     fi
     chown redis:redis $CONF_FILE
+    chmod -R 0777 /etc/redis
 fi
 
 exec docker-entrypoint.sh redis-server /etc/redis/redis.conf
