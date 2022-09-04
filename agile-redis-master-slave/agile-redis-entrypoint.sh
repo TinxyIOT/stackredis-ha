@@ -11,9 +11,9 @@ then
         echo "slaveof redis-master 6379" > $CONF_FILE
         echo "masterauth McjN2UhLrwrDKf" >> $CONF_FILE   
         echo "replica-announce-ip ${REDIS_SLAVE_HOST}" >> $CONF_FILE
-    else 
-        echo "requirepass McjN2UhLrwrDKf" >> $CONF_FILE   
+    # else 
     fi
+    echo "requirepass McjN2UhLrwrDKf" >> $CONF_FILE   
     chown redis:redis $CONF_FILE
 fi
 
