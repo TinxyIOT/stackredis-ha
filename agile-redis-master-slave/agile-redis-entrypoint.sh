@@ -9,6 +9,8 @@ then
     if [ -n "$REDIS_MASTER_HOST" ]
     then
        echo "slaveof redis-master 6379" >> $CONF_FILE
+       echo "replica-announce-ip ${REDIS_SLAVE_HOST}" >> $CONF_FILE
+       
     fi
     chown redis:redis $CONF_FILE
 fi
