@@ -5,6 +5,7 @@ CONF_FILE=/etc/redis/redis.conf
 if [ ! -f $CONF_FILE ]
 then
     echo "appendonly yes" > $CONF_FILE
+    echo "requirepass McjN2UhLrwrDKf" > $CONF_FILE
 
     if [ -n "$REDIS_MASTER_HOST" ]
     then
